@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>REVAL - REPORT EVALUATION</title>
+
+<link rel="stylesheet" type="text/css" media="all" href='static/exporter/styles.css' />
+</head>
+<body bgcolor = "#E6E6FA">
+<img src = "static/exporter/img/logo.png">
+<br>
+<form action="/exporter/auth/" method="post" class="form horizontal well">{% csrf_token %}
+    <label for="username">Użytkownik</label>
+    <input type = "text" name="username" value = "" id = "username">
+    <label for = "password">Hasło:</label>
+    <input type="password" name="password" value="" id="password">
+
+    <input type = "submit" class = "btn btn - inverse" value="Zaloguj">
+</form>
+<br>
+
+
+<form id="upload" action="upload" method="POST" enctype="multipart/form-data">
+
+<fieldset>
+    <br><br>
+
+
+<legend>Eksportuj sprawozdanie</legend>
+Użytkownik: {{ full_name }}
+<br><br>
+    <form action="...">
+    Temat sprawozdania:
+	<select name="nazwa_tematu">
+        {% for topic in topic_list %}
+		<option>{{ topic.topic_text }}</option>
+		{% endfor %}
+		(...)
+	</select>
+    Numer zadania:
+    <input type="number" name="numer_zadania" min="1" max="10">
+
+    <br><br>
+    </form>
+
+
+
+Treść zadania:
+<br><br><br>
+<input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+
+<div>
+	<label for="fileselect">Wybierz plik:</label>
+	<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+	<div id="filedrag">lub upuść plik</div>
+</div>
+
+
+	<button type="submit">Wyślij plik</button>
+
+
+</fieldset>
+
+</form>
+
+<div id="messages">
+<p>Status plików</p>
+</div>
+<form id="upload" action="index.html" method="POST" enctype="multipart/form-data">
+<textarea name="message" rows="30" cols="100">
+(opcjonalnie) Dodaj kod źródłowy
+</textarea>
+<form/>
+
+<script src='static/exporter/filedrag.js'></script>
+</body>
+</html>
+
+
+
+
+
